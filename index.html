@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding and responsive viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sparklet - Daily Health &amp; Fitness Companion</title>
+  
+  <!-- Linking our external CSS stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       1. NAVIGATION BAR (Header)
+       Contains the website brand logo, navigation links, and live stats
+       ======================================================== -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">Sparklet</span>
+    </div>
+
+    <!-- Navigation menu links with smooth scrolling to sections -->
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#habits">Habits</a>
+      <a href="#workouts">Workouts</a>
+      <a href="#diet">Diet Plan</a>
+      <a href="#checker">Calorie Checker</a>
+      <a href="#quiz">Health Quiz</a>
+    </nav>
+
+    <!-- User stats: Current Streak and Experience Points (XP) -->
+    <div class="user-stats">
+      <div class="stat-badge">
+        <span>🔥</span>
+        <strong><span id="streakCount">4</span> Days</strong>
+      </div>
+      <div class="stat-badge">
+        <span>⚡</span>
+        <strong><span id="xpCount">120</span> XP</strong>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================
+       2. HERO SECTION
+       Introduction banner with motivational message and quick action
+       ======================================================== -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <span class="pill-tag">✨ Daily Wellness Made Simple</span>
+      <h1>Build Healthy Habits, One Day at a Time.</h1>
+      <p>
+        Track your daily water, follow beginner-friendly workouts, explore nutritious meal plans,
+        and test your health knowledge—all in one simple place.
+      </p>
+      
+      <div class="hero-buttons">
+        <a href="#habits" class="btn btn-primary">Track Today's Habits</a>
+        <a href="#checker" class="btn btn-outline">Check Food Calories</a>
+      </div>
+    </div>
+
+    <!-- Quick summary highlight card -->
+    <div class="hero-card">
+      <h3>Today's Sparklet Goal</h3>
+      <p class="card-sub">Complete 3 simple tasks daily to keep your streak glowing!</p>
+      <div class="progress-bar-container">
+        <div id="heroProgressBar" class="progress-bar-fill" style="width: 40%;"></div>
+      </div>
+      <p class="progress-text"><span id="completedTasksCount">1</span> of 3 Daily Goals Finished</p>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       3. DAILY HABITS TRACKER SECTION
+       Interactive habit cards (Water tracking, 10-min movement, healthy fruit)
+       ======================================================== -->
+  <section id="habits" class="section container">
+    <div class="section-header">
+      <h2>💧 Daily Habit Tracker</h2>
+      <p>Log your daily essentials to earn points and stay energized.</p>
+    </div>
+
+    <div class="cards-grid">
+      
+      <!-- Habit Card 1: Water Tracker -->
+      <div class="card habit-card">
+        <div class="card-icon blue-bg">💧</div>
+        <h3>Hydration Goal</h3>
+        <p>Goal: Drink 8 glasses of fresh water daily (approx. 2 liters).</p>
+        
+        <div class="habit-status">
+          <span class="counter-display"><span id="waterCount">3</span> / 8 Glasses</span>
+        </div>
+
+        <div class="habit-actions">
+          <button type="button" class="btn btn-sm btn-outline" onclick="removeWater()">- Remove</button>
+          <button type="button" class="btn btn-sm btn-blue" onclick="addWater()">+ Add Glass</button>
+        </div>
+      </div>
+
+      <!-- Habit Card 2: Morning Movement -->
+      <div class="card habit-card">
+        <div class="card-icon green-bg">🏃</div>
+        <h3>Morning Stretch / Walk</h3>
+        <p>Goal: Move your body for at least 10 minutes to boost circulation.</p>
+        
+        <div class="habit-status">
+          <span id="moveStatus" class="status-badge pending">Pending ⏳</span>
+        </div>
+
+        <div class="habit-actions">
+          <button type="button" id="moveBtn" class="btn btn-sm btn-green" onclick="completeMoveTask()">
+            Mark Done (+15 XP)
+          </button>
+        </div>
+      </div>
+
+      <!-- Habit Card 3: Healthy Food Choice -->
+      <div class="card habit-card">
+        <div class="card-icon orange-bg">🥗</div>
+        <h3>Colourful Healthy Food</h3>
+        <p>Goal: Add at least one fresh fruit, salad, or vegetable to your plate.</p>
+        
+        <div class="habit-status">
+          <span id="mealStatus" class="status-badge pending">Pending ⏳</span>
+        </div>
+
+        <div class="habit-actions">
+          <button type="button" id="mealBtn" class="btn btn-sm btn-orange" onclick="completeMealTask()">
+            Mark Done (+15 XP)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       4. WORKOUTS & EXERCISE STUDIO
+       Simple, no-equipment exercise routines suitable for students
+       ======================================================== -->
+  <section id="workouts" class="section container bg-light">
+    <div class="section-header">
+      <h2>🏃 Quick Student Workouts</h2>
+      <p>No gym or equipment needed. Perfect for study breaks!</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- Workout 1 -->
+      <div class="card workout-card">
+        <div class="workout-header">
+          <span class="badge-tag">5 Minutes</span>
+          <span class="badge-tag level">Beginner</span>
+        </div>
+        <div class="card-icon yellow-bg">⚡</div>
+        <h3>5-Minute Energy Boost</h3>
+        <p>Wake up your mind and muscles between study sessions.</p>
+        <ol class="workout-steps">
+          <li><strong>March in place</strong> - 30 seconds</li>
+          <li><strong>Arm circles</strong> - 10 forward, 10 backward</li>
+          <li><strong>Bodyweight squats</strong> - 10 gentle repetitions</li>
+          <li><strong>Deep breathing stretch</strong> - 3 slow breaths</li>
+        </ol>
+        <button type="button" class="btn btn-full btn-outline" onclick="completeWorkout('Energy Boost')">
+          Complete Routine (+20 XP)
+        </button>
+      </div>
+
+      <!-- Workout 2 -->
+      <div class="card workout-card">
+        <div class="workout-header">
+          <span class="badge-tag">4 Minutes</span>
+          <span class="badge-tag level">Relaxing</span>
+        </div>
+        <div class="card-icon green-bg">🤸</div>
+        <h3>Desk &amp; Neck Reset</h3>
+        <p>Relieve neck, back, and shoulder stiffness from laptop use.</p>
+        <ol class="workout-steps">
+          <li><strong>Neck rolls</strong> - 5 slow rotations each side</li>
+          <li><strong>Shoulder shrugs</strong> - Lift shoulders &amp; hold 3 sec</li>
+          <li><strong>Seated spine twist</strong> - Gentle turn left and right</li>
+          <li><strong>Wrist flexor stretch</strong> - Extend arms and flex hands</li>
+        </ol>
+        <button type="button" class="btn btn-full btn-outline" onclick="completeWorkout('Desk Reset')">
+          Complete Routine (+20 XP)
+        </button>
+      </div>
+
+      <!-- Workout 3 -->
+      <div class="card workout-card">
+        <div class="workout-header">
+          <span class="badge-tag">15 Minutes</span>
+          <span class="badge-tag level">Cardio</span>
+        </div>
+        <div class="card-icon blue-bg">🚶</div>
+        <h3>Brisk Campus Walk</h3>
+        <p>Clear mental fatigue and get healthy natural sunshine.</p>
+        <ol class="workout-steps">
+          <li><strong>Warm-up pace</strong> - 3 minutes easy strolling</li>
+          <li><strong>Brisk walking</strong> - 8 minutes fast walking pace</li>
+          <li><strong>Calf raises</strong> - 15 raises on flat ground</li>
+          <li><strong>Cool down</strong> - 3 minutes relaxed breathing</li>
+        </ol>
+        <button type="button" class="btn btn-full btn-outline" onclick="completeWorkout('Campus Walk')">
+          Complete Routine (+20 XP)
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       5. DAILY DIET & MEAL PLAN SECTION
+       Uses clean HTML Tables to display daily vegetarian & non-vegetarian plans
+       ======================================================== -->
+  <section id="diet" class="section container">
+    <div class="section-header">
+      <h2>🍽️ Balanced Daily Meal Plan</h2>
+      <p>Nutritious and easy meals designed for healthy energy all day long.</p>
+
+      <!-- Toggle buttons to switch between Vegetarian and Non-Vegetarian -->
+      <div class="diet-toggle">
+        <button type="button" id="btnVeg" class="toggle-btn active" onclick="showDiet('veg')">🥦 Vegetarian</button>
+        <button type="button" id="btnNonVeg" class="toggle-btn" onclick="showDiet('nonveg')">🍗 Non-Vegetarian</button>
+      </div>
+    </div>
+
+    <!-- VEGETARIAN MEAL TABLE -->
+    <div id="vegTable" class="table-responsive">
+      <table class="meal-table">
+        <thead>
+          <tr>
+            <th>Meal Time</th>
+            <th>Recommended Food Item</th>
+            <th>Serving Size</th>
+            <th>Calories</th>
+            <th>Key Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🌅 Breakfast (8:00 AM)</strong></td>
+            <td>Veggie Poha / Oats with milk &amp; almonds</td>
+            <td>1 medium bowl</td>
+            <td>350 kcal</td>
+            <td>Complex carbs for morning brain energy</td>
+          </tr>
+          <tr>
+            <td><strong>🍎 Mid-Morning (11:00 AM)</strong></td>
+            <td>Fresh seasonal fruit (Apple / Banana / Orange)</td>
+            <td>1 whole fruit</td>
+            <td>90 kcal</td>
+            <td>Rich in Vitamin C, fiber &amp; hydration</td>
+          </tr>
+          <tr>
+            <td><strong>☀️ Lunch (1:30 PM)</strong></td>
+            <td>2 Rotis, 1 bowl Dal Tadka, Mixed Veggie &amp; Salad</td>
+            <td>1 plate thali</td>
+            <td>550 kcal</td>
+            <td>Plant protein, iron, and dietary fiber</td>
+          </tr>
+          <tr>
+            <td><strong>☕ Evening Snack (5:00 PM)</strong></td>
+            <td>Roasted Chana / Makhana with Green Tea</td>
+            <td>1 small cup</td>
+            <td>140 kcal</td>
+            <td>Light, crunchy, guilt-free study snack</td>
+          </tr>
+          <tr>
+            <td><strong>🌙 Dinner (8:00 PM)</strong></td>
+            <td>Paneer Sabzi / Khichdi with curd &amp; cucumber</td>
+            <td>1 bowl</td>
+            <td>420 kcal</td>
+            <td>Light on stomach, promotes restful sleep</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NON-VEGETARIAN MEAL TABLE (Hidden by default, shown when user clicks button) -->
+    <div id="nonVegTable" class="table-responsive" style="display: none;">
+      <table class="meal-table">
+        <thead>
+          <tr>
+            <th>Meal Time</th>
+            <th>Recommended Food Item</th>
+            <th>Serving Size</th>
+            <th>Calories</th>
+            <th>Key Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🌅 Breakfast (8:00 AM)</strong></td>
+            <td>2 Boiled Eggs with Whole Wheat Toast &amp; Tea</td>
+            <td>2 eggs + 2 slices</td>
+            <td>380 kcal</td>
+            <td>High biological value protein &amp; choline</td>
+          </tr>
+          <tr>
+            <td><strong>🍎 Mid-Morning (11:00 AM)</strong></td>
+            <td>Fresh Fruit Salad with Pumpkin Seeds</td>
+            <td>1 bowl</td>
+            <td>120 kcal</td>
+            <td>Antioxidants and healthy omega fats</td>
+          </tr>
+          <tr>
+            <td><strong>☀️ Lunch (1:30 PM)</strong></td>
+            <td>Grilled Chicken or Fish Curry, Steamed Rice &amp; Veggies</td>
+            <td>150g meat + rice</td>
+            <td>620 kcal</td>
+            <td>Lean muscle building protein &amp; minerals</td>
+          </tr>
+          <tr>
+            <td><strong>☕ Evening Snack (5:00 PM)</strong></td>
+            <td>1 Boiled Egg or Sprout Chaat with Lemon</td>
+            <td>1 serving</td>
+            <td>130 kcal</td>
+            <td>Keeps evening energy steady without sugar spikes</td>
+          </tr>
+          <tr>
+            <td><strong>🌙 Dinner (8:00 PM)</strong></td>
+            <td>Egg Bhurji or Grilled Fish with 1 Roti &amp; Soup</td>
+            <td>1 bowl</td>
+            <td>460 kcal</td>
+            <td>Easy digestion, high protein overnight recovery</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note">
+      💡 <em>Note: Nutrition values are general estimates for healthy students. Drink adequate water with all meals.</em>
+    </p>
+  </section>
+
+
+  <!-- ========================================================
+       6. FOOD CALORIE & NUTRITION CHECKER
+       Simple HTML Form that calculates calories using basic JavaScript
+       ======================================================== -->
+  <section id="checker" class="section container bg-light">
+    <div class="section-header">
+      <h2>🍎 Food Calorie &amp; Nutrition Calculator</h2>
+      <p>Select any common food item to calculate total calories and protein.</p>
+    </div>
+
+    <div class="checker-container">
+      <!-- Calculator Form -->
+      <form id="calorieForm" class="calculator-form" onsubmit="event.preventDefault(); calculateCalories();">
+        <div class="form-group">
+          <label for="foodSelect">Select Food Item:</label>
+          <select id="foodSelect" class="form-control" onchange="calculateCalories()">
+            <option value="apple">🍎 Apple (1 medium - ~95 kcal)</option>
+            <option value="banana">🍌 Banana (1 medium - ~105 kcal)</option>
+            <option value="egg">🥚 Boiled Egg (1 whole - ~78 kcal)</option>
+            <option value="roti">🫓 Whole Wheat Roti (1 piece - ~100 kcal)</option>
+            <option value="rice">🍚 Cooked Rice (1 bowl - ~200 kcal)</option>
+            <option value="dal">🍲 Dal / Lentils (1 bowl - ~180 kcal)</option>
+            <option value="paneer">🧀 Paneer (100 grams - ~265 kcal)</option>
+            <option value="chicken">🍗 Chicken Breast (100 grams - ~165 kcal)</option>
+            <option value="milk">🥛 Milk (1 glass / 250ml - ~150 kcal)</option>
+            <option value="salad">🥗 Mixed Green Salad (1 bowl - ~50 kcal)</option>
+            <option value="almonds">🥜 Almonds (10 nuts - ~70 kcal)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="foodQuantity">Number of Servings / Quantity:</label>
+          <input type="number" id="foodQuantity" class="form-control" value="1" min="1" max="10" oninput="calculateCalories()">
+        </div>
+
+        <button type="button" class="btn btn-primary btn-full" onclick="calculateCalories()">
+          Calculate Nutrition
+        </button>
+      </form>
+
+      <!-- Calculator Output Display Card -->
+      <div class="calculator-result-card" id="calcResultBox">
+        <h3>Nutrition Summary</h3>
+        <div class="result-stat-row">
+          <div class="result-stat">
+            <span class="result-number" id="resCalories">95</span>
+            <span class="result-label">Calories (kcal)</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-number" id="resProtein">0.5g</span>
+            <span class="result-label">Protein</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-number" id="resCarbs">25g</span>
+            <span class="result-label">Carbohydrates</span>
+          </div>
+        </div>
+        <p class="health-tip" id="resTip">
+          🍎 <strong>Tip:</strong> Apples are rich in dietary fiber and Vitamin C. Great for gut health and a quick snack!
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       7. INTERACTIVE 1-MINUTE HEALTH QUIZ
+       Demonstrates HTML Form handling with radio inputs & JS evaluation
+       ======================================================== -->
+  <section id="quiz" class="section container">
+    <div class="section-header">
+      <h2>❓ 1-Minute Health &amp; Nutrition Quiz</h2>
+      <p>Test your basic health knowledge and earn +30 bonus XP!</p>
+    </div>
+
+    <div class="quiz-card">
+      <form id="healthQuizForm" onsubmit="event.preventDefault(); checkQuiz();">
+        
+        <!-- Question 1 -->
+        <div class="quiz-question">
+          <p class="question-title">1. How much water should an average adult student drink each day?</p>
+          <div class="options-group">
+            <label class="quiz-option">
+              <input type="radio" name="q1" value="A"> Only 1 glass when thirsty
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q1" value="B"> 8 to 10 glasses (about 2 liters)
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q1" value="C"> None, soda is enough
+            </label>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-question">
+          <p class="question-title">2. Which nutrient is primarily needed for repairing muscle tissue?</p>
+          <div class="options-group">
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="A"> Protein (Eggs, Dal, Paneer, Chicken)
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="B"> Refined Sugar (Candies, Cold drinks)
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="C"> Sodium / Table Salt
+            </label>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-question">
+          <p class="question-title">3. What is the best habit to avoid neck and back stiffness while studying?</p>
+          <div class="options-group">
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="A"> Sit continuously for 5 hours without moving
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="B"> Take a short 2-minute stretch break every 45-60 minutes
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="C"> Slouch backwards with bad posture
+            </label>
+          </div>
+        </div>
+
+        <div class="quiz-submit-area">
+          <button type="button" class="btn btn-green" onclick="checkQuiz()">Submit Answers</button>
+          <button type="reset" class="btn btn-outline" onclick="resetQuiz()">Clear Form</button>
+        </div>
+      </form>
+
+      <!-- Quiz feedback box (hidden initially, shown after submit) -->
+      <div id="quizFeedback" class="quiz-feedback" style="display: none;"></div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       8. ACHIEVEMENTS & BADGES SECTION
+       Shows awards that unlock as the student uses the app
+       ======================================================== -->
+  <section class="section container bg-light">
+    <div class="section-header">
+      <h2>🏅 Badges &amp; Achievements</h2>
+      <p>Milestones you have unlocked on your healthy journey.</p>
+    </div>
+
+    <div class="badges-grid">
+      <div class="badge-card unlocked">
+        <div class="badge-icon">🌱</div>
+        <h4>First Spark</h4>
+        <p>Started your Sparklet health journey</p>
+        <span class="badge-tag status-done">Unlocked ✓</span>
+      </div>
+
+      <div class="badge-card" id="badgeWater">
+        <div class="badge-icon">💧</div>
+        <h4>Hydration Hero</h4>
+        <p>Drink all 8 glasses of water in a day</p>
+        <span class="badge-tag" id="badgeWaterTag">In Progress</span>
+      </div>
+
+      <div class="badge-card" id="badgeMove">
+        <div class="badge-icon">🏃</div>
+        <h4>Move Master</h4>
+        <p>Complete a morning workout or walk</p>
+        <span class="badge-tag" id="badgeMoveTag">In Progress</span>
+      </div>
+
+      <div class="badge-card" id="badgeQuiz">
+        <div class="badge-icon">⭐</div>
+        <h4>Quiz Champion</h4>
+        <p>Score 3/3 on the Health &amp; Nutrition Quiz</p>
+        <span class="badge-tag" id="badgeQuizTag">In Progress</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       9. FOOTER
+       Basic student information, credits, and project summary
+       ======================================================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h3>✦ Sparklet</h3>
+        <p>A simple, beginner-friendly Health &amp; Fitness web application.</p>
+        <p class="student-note">
+          <strong>Academic Project:</strong> B.Tech 1st Semester &bull; HTML5, CSS3 &amp; JavaScript
+        </p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Navigation</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#habits">Habit Tracker</a></li>
+          <li><a href="#workouts">Workouts</a></li>
+          <li><a href="#diet">Diet Plan</a></li>
+          <li><a href="#checker">Calorie Calculator</a></li>
+          <li><a href="#quiz">Health Quiz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sparklet Project. Built with clean HTML, CSS, and JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Notification Toast message popup -->
+  <div id="toast" class="toast">Action completed!</div>
+
+  <!-- Linking our simple external JavaScript file at the end of the body -->
+  <script src="script.js"></script>
+</body>
+</html>

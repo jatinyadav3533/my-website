@@ -1,0 +1,917 @@
+/* ==========================================================================
+   SPARKLET - style.css
+   Cascading Style Sheets (CSS) controls the visual presentation,
+   colors, fonts, layout, and responsiveness of the web page.
+   
+   Structure of this file:
+     1. CSS Variables (Theme colors & typography)
+     2. Global Reset & Body Styles
+     3. Navigation Bar (Header)
+     4. Buttons & Badges
+     5. Hero Section
+     6. Cards & Grid System (Habits & Workouts)
+     7. Diet Plan Table Styling
+     8. Calorie Calculator Form & Result Card
+     9. Interactive Quiz Styling
+    10. Achievements & Badges
+    11. Footer
+    12. Toast Notification Popup
+    13. Responsive Media Queries (Mobile & Tablet)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. CSS VARIABLES
+   Store reusable values in one place. If you change a color here,
+   it automatically updates everywhere across the whole website!
+   ========================================================================== */
+:root {
+  --primary-green: #2ecc71;       /* Main cheerful green */
+  --dark-green: #27ae60;          /* Darker green for hover states & borders */
+  --light-green: #e8f8f0;         /* Soft mint green background for badges */
+  --sky-blue: #3498db;            /* Blue for water and info */
+  --light-blue: #ebf5fb;          /* Soft blue background */
+  --orange: #e67e22;              /* Warm orange for meals & highlights */
+  --yellow: #f1c40f;              /* Yellow for energy workouts */
+  --dark-slate: #2c3e50;          /* Dark charcoal for main text readability */
+  --text-muted: #7f8c8d;          /* Soft gray for subtitles and notes */
+  --bg-page: #f8fafc;             /* Very light slate-gray page background */
+  --bg-card: #ffffff;             /* Crisp white background for cards */
+  --border-color: #e2e8f0;        /* Subtle border line */
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.06); /* Soft modern card drop shadow */
+  --radius: 12px;                 /* Smooth rounded corners */
+}
+
+
+/* ==========================================================================
+   2. GLOBAL RESET & BODY STYLES
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;         /* Ensures padding and border don't increase element width */
+}
+
+html {
+  scroll-behavior: smooth;        /* Smooth scrolling when clicking menu links */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--dark-slate);
+  line-height: 1.6;
+}
+
+/* Reusable container to keep content centered with neat margins */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Standard section spacing */
+.section {
+  padding: 60px 20px;
+}
+
+.bg-light {
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 40px auto;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  color: var(--dark-slate);
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+
+/* ==========================================================================
+   3. NAVIGATION BAR (Header)
+   Uses CSS Flexbox to position brand logo, nav links, and user points
+   ========================================================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;               /* Stays fixed at top when scrolling down */
+  top: 0;
+  background-color: #ffffff;
+  padding: 14px 28px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  background-color: var(--primary-green);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark-slate);
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark-slate);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--dark-green);
+  background-color: var(--light-green);
+}
+
+.user-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f1f5f9;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+}
+
+
+/* ==========================================================================
+   4. BUTTONS & UI BADGES
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);    /* Lifts button slightly on hover */
+}
+
+.btn:active {
+  transform: translateY(0);       /* Pressed down effect */
+}
+
+.btn-primary {
+  background-color: var(--primary-green);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+.btn-primary:hover {
+  background-color: var(--dark-green);
+}
+
+.btn-blue {
+  background-color: var(--sky-blue);
+  color: #ffffff;
+}
+.btn-blue:hover {
+  background-color: #2980b9;
+}
+
+.btn-green {
+  background-color: var(--primary-green);
+  color: #ffffff;
+}
+.btn-green:hover {
+  background-color: var(--dark-green);
+}
+
+.btn-orange {
+  background-color: var(--orange);
+  color: #ffffff;
+}
+.btn-orange:hover {
+  background-color: #d35400;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--dark-slate);
+  border: 1.5px solid var(--border-color);
+}
+.btn-outline:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.pill-tag {
+  display: inline-block;
+  background-color: var(--light-green);
+  color: var(--dark-green);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.hero-content h1 {
+  font-size: 38px;
+  line-height: 1.25;
+  color: var(--dark-slate);
+  margin-bottom: 16px;
+}
+
+.hero-content p {
+  font-size: 17px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+}
+
+/* Hero Summary Card */
+.hero-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.hero-card h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: var(--dark-slate);
+}
+
+.card-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 12px;
+  background-color: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-green), #27ae60);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-slate);
+}
+
+
+/* ==========================================================================
+   6. CARDS & GRID SYSTEM (Habits & Workouts)
+   ========================================================================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+
+.blue-bg   { background-color: var(--light-blue); }
+.green-bg  { background-color: var(--light-green); }
+.orange-bg { background-color: #fdf2e9; }
+.yellow-bg { background-color: #fef9e7; }
+
+.habit-card h3, .workout-card h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+  color: var(--dark-slate);
+}
+
+.habit-card p, .workout-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 18px;
+  flex-grow: 1;                   /* Pushes the buttons to the bottom of the card */
+}
+
+.habit-status {
+  margin-bottom: 16px;
+}
+
+.counter-display {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sky-blue);
+  background-color: var(--light-blue);
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.completed {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+
+.habit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Workout Card Details */
+.workout-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.badge-tag {
+  background-color: #f1f5f9;
+  color: var(--dark-slate);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.badge-tag.level {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+
+.workout-steps {
+  margin: 0 0 20px 20px;
+  font-size: 14px;
+  color: var(--dark-slate);
+}
+
+.workout-steps li {
+  margin-bottom: 8px;
+}
+
+
+/* ==========================================================================
+   7. DIET PLAN TABLE STYLING
+   ========================================================================== */
+.diet-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.toggle-btn {
+  background-color: #f1f5f9;
+  color: var(--dark-slate);
+  border: 1px solid var(--border-color);
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background-color: var(--primary-green);
+  color: #ffffff;
+  border-color: var(--primary-green);
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;               /* Allows horizontal scroll on narrow mobile screens */
+  margin-top: 24px;
+  background-color: #ffffff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.meal-table {
+  width: 100%;
+  border-collapse: collapse;      /* Removes double borders between cells */
+  text-align: left;
+}
+
+.meal-table thead {
+  background-color: #f8fafc;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.meal-table th {
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark-slate);
+}
+
+.meal-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: var(--dark-slate);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.meal-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Alternating zebra stripe row effect */
+.meal-table tbody tr:nth-child(even) {
+  background-color: #fbfcfe;
+}
+
+.meal-table tbody tr:hover {
+  background-color: #f1f7fe;      /* Subtle highlight when mouse hovers over row */
+}
+
+.table-note {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+
+/* ==========================================================================
+   8. CALORIE CALCULATOR FORM & RESULT CARD
+   ========================================================================== */
+.checker-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.calculator-form {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--dark-slate);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--dark-slate);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+/* Calculator Result Card */
+.calculator-result-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.calculator-result-card h3 {
+  font-size: 19px;
+  margin-bottom: 20px;
+  color: var(--dark-slate);
+}
+
+.result-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.result-stat {
+  background-color: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 16px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.result-number {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--dark-green);
+  margin-bottom: 4px;
+}
+
+.result-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.health-tip {
+  background-color: var(--light-green);
+  border-left: 4px solid var(--primary-green);
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1e3a29;
+}
+
+
+/* ==========================================================================
+   9. INTERACTIVE QUIZ STYLING
+   ========================================================================== */
+.quiz-card {
+  max-width: 780px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.quiz-question {
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quiz-question:last-of-type {
+  border-bottom: none;
+}
+
+.question-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-slate);
+  margin-bottom: 14px;
+}
+
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.quiz-option input[type="radio"] {
+  accent-color: var(--primary-green);
+  width: 17px;
+  height: 17px;
+}
+
+.quiz-submit-area {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.quiz-feedback {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.quiz-feedback.success {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+  border: 1px solid #bbf7d0;
+}
+
+.quiz-feedback.warning {
+  background-color: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde047;
+}
+
+
+/* ==========================================================================
+   10. ACHIEVEMENTS & BADGES
+   ========================================================================== */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.badge-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 22px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  opacity: 0.7;                   /* Locked / in-progress badges look softer */
+  transition: all 0.3s ease;
+}
+
+.badge-card.unlocked {
+  opacity: 1;
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.15);
+}
+
+.badge-icon {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.badge-card h4 {
+  font-size: 17px;
+  margin-bottom: 6px;
+  color: var(--dark-slate);
+}
+
+.badge-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.status-done {
+  background-color: var(--light-green) !important;
+  color: var(--dark-green) !important;
+}
+
+
+/* ==========================================================================
+   11. FOOTER
+   ========================================================================== */
+.footer {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding: 50px 0 20px 0;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-brand h3 {
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.student-note {
+  color: var(--primary-green) !important;
+  font-size: 13px;
+}
+
+.footer-links h4 {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #334155;
+  font-size: 13px;
+  color: #64748b;
+}
+
+
+/* ==========================================================================
+   12. TOAST NOTIFICATION POPUP
+   Small floating feedback notification at the bottom center of the screen
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px); /* Hidden offscreen below */
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);    /* Slides up into view */
+}
+
+
+/* ==========================================================================
+   13. RESPONSIVE MEDIA QUERIES
+   Adapts the layout smoothly for Tablets and Mobile Phones
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .checker-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
